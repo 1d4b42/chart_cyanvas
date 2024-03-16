@@ -49,8 +49,8 @@ class DiscordRequest
     end
 
     Rails.logger.info("Discord: #{method.to_s.upcase} #{path}")
-    response =
-      HTTP.request(method, "https://discord.com/api/v10#{path}", **options)
+    response = HTTP.request(method, "https://discord.com/api/v10#{path}", **options)
+
 
     if response.headers["X-RateLimit-Remaining"]
       @@ratelimits[response.headers["X-RateLimit-Bucket"]] = {

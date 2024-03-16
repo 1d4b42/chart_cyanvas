@@ -83,8 +83,9 @@ class Api::DiscordController < FrontendController
     response =
       begin
         $discord.post("/oauth2/token", form: payload)
-      rescue StandardError
-        redirect_to "/discord/error?code=discord_error"
+      rescue StandardError => e
+        logger.error(e)
+        redirect_to "/discord/error?code=discord_error?code=discord_error"
         return
       end
 
@@ -161,7 +162,8 @@ class Api::DiscordController < FrontendController
           "platform_username" => current_user.to_s
         }
       )
-    rescue StandardError
+    rescue StandardError => e
+      logger.error(e)
       redirect_to "/discord/error?code=discordError"
       return
     end

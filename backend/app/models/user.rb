@@ -59,7 +59,7 @@ class User < ApplicationRecord
     )
     true
   rescue StandardError
-    update!(discord_status: :no, discord_token: nil, discord_refresh_token: nil)
+    update!(discord_status: :linked, discord_token: nil, discord_refresh_token: nil)
     false
   end
 
